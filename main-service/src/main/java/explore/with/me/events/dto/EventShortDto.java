@@ -32,18 +32,24 @@ import javax.validation.constraints.Positive;
 public class EventShortDto {
     @Positive
     private Long id;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private String title;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private String annotation;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private CategoryDto category;
     private Integer confirmedRequests;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private String eventDate;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private UserShortDto initiator;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private Boolean paid;
     private Integer views;
 }

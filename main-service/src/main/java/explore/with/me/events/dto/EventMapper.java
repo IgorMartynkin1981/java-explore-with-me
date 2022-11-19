@@ -32,7 +32,9 @@ public class EventMapper {
     }
 
     public static EventFullDto toEventFullDto(Event event) {
-        EventFullDto eventFullDto = new EventFullDto(event.getId(),
+        EventFullDto eventFullDto = new EventFullDto(
+                event.getId(),
+                event.getTitle(),
                 event.getAnnotation(),
                 CategoryMapper.toCategoryDto(event.getCategory()),
                 event.getConfirmedRequests(),
@@ -45,7 +47,6 @@ public class EventMapper {
                 event.getParticipantLimit(),
                 event.getRequestModeration(),
                 event.getState(),
-                event.getTitle(),
                 event.getViews());
         if (event.getPublishedOn() != null) {
             eventFullDto.setPublishedOn(event.getPublishedOn().format(UtilClass.getFormat()));
@@ -54,15 +55,15 @@ public class EventMapper {
     }
 
     public static EventShortDto toEventShortDto(Event event) {
-        return new EventShortDto(event.getId(),
+        return new EventShortDto(
+                event.getId(),
+                event.getTitle(),
                 event.getAnnotation(),
                 CategoryMapper.toCategoryDto(event.getCategory()),
                 event.getConfirmedRequests(),
-                event.getDescription(),
                 event.getEventDate().format(UtilClass.getFormat()),
                 UserMapper.toUserShortDto(event.getInitiator()),
                 event.getPaid(),
-                event.getTitle(),
                 event.getViews());
     }
 }

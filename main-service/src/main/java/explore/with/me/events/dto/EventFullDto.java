@@ -68,14 +68,14 @@ public class EventFullDto {
     private Boolean requestModeration;
     private State state;
     private Integer views;
-    private Long likeCount;
-    private Long dislikeCount;
 
-    public EventFullDto(Long id, String annotation, CategoryDto category, Integer confirmedRequests,
-                        String createdOn, String description, String eventDate, UserShortDto initiator,
-                        Location location, Boolean paid, Integer participantLimit, Boolean requestModeration,
-                        State state, String title, Integer views, Long likeCount, Long dislikeCount) {
+    public EventFullDto(Long id, String title, String annotation, CategoryDto category,
+                        Integer confirmedRequests, String createdOn, String description,
+                        String eventDate, UserShortDto initiator, Location location,
+                        Boolean paid, Integer participantLimit, Boolean requestModeration,
+                        State state, Integer views) {
         this.id = id;
+        this.title = title;
         this.annotation = annotation;
         this.category = category;
         this.confirmedRequests = confirmedRequests;
@@ -88,9 +88,6 @@ public class EventFullDto {
         this.participantLimit = participantLimit;
         this.requestModeration = requestModeration;
         this.state = state;
-        this.title = title;
         this.views = views;
-        this.likeCount = likeCount;
-        this.dislikeCount = dislikeCount;
     }
 }
