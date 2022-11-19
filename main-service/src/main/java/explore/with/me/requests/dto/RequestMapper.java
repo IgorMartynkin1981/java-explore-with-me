@@ -1,6 +1,6 @@
 package explore.with.me.requests.dto;
 
-import explore.with.me.events.dto.UtilClass;
+import explore.with.me.UtilClass;
 import explore.with.me.events.models.Event;
 import explore.with.me.requests.models.Request;
 import explore.with.me.users.models.User;

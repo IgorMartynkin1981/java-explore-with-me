@@ -1,4 +1,4 @@
-package explore.with.me.events.dto;
+package explore.with.me;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

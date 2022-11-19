@@ -7,10 +7,6 @@ import explore.with.me.users.models.User;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Класс инструкций для Пользователя
- */
-
 public interface UserService {
 
     Collection<UserDto> getUsers(List<Long> usersIds, Integer from, Integer size);
