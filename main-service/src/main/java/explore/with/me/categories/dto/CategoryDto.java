@@ -17,7 +17,7 @@ import javax.validation.constraints.Positive;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryDto {
+public class CategoryDto extends CategoryMapper {
 
     @Positive
     @NotNull

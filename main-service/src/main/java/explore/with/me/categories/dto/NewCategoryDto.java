@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewCategoryDto {
+public class NewCategoryDto extends CategoryMapper {
 
     @NotBlank
     @NotNull
