@@ -10,8 +10,6 @@ import explore.with.me.categories.models.Category;
 
 public interface AdminCategoryService {
 
-    Category getCategory(Long categoryId);
-
     CategoryDto addNewCategory(NewCategoryDto newCategoryDto);
 
     CategoryDto updateCategory(CategoryDto categoryDto);

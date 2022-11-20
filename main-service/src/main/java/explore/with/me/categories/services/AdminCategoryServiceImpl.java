@@ -14,11 +14,6 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
     private final CategoryRepository categoryRepository;
 
     @Override
-    public Category getCategory(Long categoryId) {
-        return null;
-    }
-
-    @Override
     public CategoryDto addNewCategory(NewCategoryDto newCategoryDto) {
         return null;
     }
