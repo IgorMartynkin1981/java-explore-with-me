@@ -11,8 +11,6 @@ public interface UserService {
 
     Collection<UserDto> getUsers(List<Long> usersIds, Integer from, Integer size);
 
-    User getUserById(Long userId);
-
     UserDto addUser(NewUserRequest newUserRequest);
 
     void deleteUser(Long userId);
