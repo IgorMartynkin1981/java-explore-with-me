@@ -12,11 +12,11 @@ public interface PrivateEventService {
 
     Collection<EventShortDto> getEventListByUserId(Long userId, Integer from, Integer size);
 
-    EventFullDto updateEvent(Long userId, UpdateEventRequest updateEventRequest);
+    EventFullDto getEventById(Long userId, Long eventId);
 
     EventFullDto addNewEvent(Long userId, NewEventDto newEventDto);
 
-    EventFullDto getEventById(Long userId, Long eventId);
+    EventFullDto updateEvent(Long userId, UpdateEventRequest updateEventRequest);
 
     EventFullDto cancelEvent(Long userId, Long eventId);
 
