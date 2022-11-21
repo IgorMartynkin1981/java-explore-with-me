@@ -18,6 +18,7 @@ public class PublicCategoryController {
 
     private final PublicCategoryService publicCategoryService;
 
+    @GetMapping
     public Collection<CategoryDto> getCategories(@RequestParam(name = "from", defaultValue = "0")
                                                  @PositiveOrZero Integer from,
                                                  @RequestParam(name = "size", defaultValue = "10")
