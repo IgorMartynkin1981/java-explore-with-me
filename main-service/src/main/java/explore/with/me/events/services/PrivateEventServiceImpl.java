@@ -38,7 +38,13 @@ public class PrivateEventServiceImpl implements PrivateEventService {
 
     @Override
     public EventFullDto getEventById(Long userId, Long eventId) {
-        return null;
+        User initiator = userService.getUserById(userId);
+        Event event = findEventById(eventId);
+        if (!Objects.equals(initiator.getId(), event.getInitiator().getId())) {
+            throw new ForbiddenException("Event data can be get only by the user who created it, " +
+                    "or by an administrator");
+        }
+        return EventMapper.toEventFullDto(event);
     }
 
     @Override
