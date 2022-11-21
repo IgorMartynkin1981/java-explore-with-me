@@ -15,12 +15,14 @@ import explore.with.me.requests.dto.ParticipationRequestDto;
 import explore.with.me.users.models.User;
 import explore.with.me.users.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +35,13 @@ public class PrivateEventServiceImpl implements PrivateEventService {
 
     @Override
     public Collection<EventShortDto> getEventListByUserId(Long userId, Integer from, Integer size) {
-        return null;
+        userService.getUserById(userId);
+        int page = from / size;
+        Collection<Event> eventCollection = eventRepository.findAll(PageRequest.of(page, size))
+                .stream()
+                .filter(event -> Objects.equals(event.getInitiator().getId(), userId))
+                .collect(Collectors.toList());
+        return eventCollection.stream().map(EventMapper::toEventShortDto).collect(Collectors.toList());
     }
 
     @Override
