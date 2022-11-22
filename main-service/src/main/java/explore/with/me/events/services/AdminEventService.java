@@ -16,7 +16,7 @@ public interface AdminEventService {
                                             Integer from,
                                             Integer size);
 
-    EventFullDto updateEvent(Long eventId, AdminUpdateEventRequest request);
+    EventFullDto updateEvent(Long eventId, AdminUpdateEventRequest adminUpdateEventRequest);
 
     EventFullDto publishEvent(Long eventId);
 
