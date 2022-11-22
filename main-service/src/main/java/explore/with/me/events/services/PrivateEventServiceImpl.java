@@ -1,5 +1,6 @@
 package explore.with.me.events.services;
 
+import explore.with.me.UtilClass;
 import explore.with.me.categories.dto.CategoryMapper;
 import explore.with.me.categories.models.Category;
 import explore.with.me.categories.services.PublicCategoryService;
@@ -57,6 +58,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
 
     @Override
     public EventFullDto addNewEvent(Long userId, NewEventDto newEventDto) {
+        checkStartOfEventAtLeast2Hours(newEventDto.getEventDate());
         User initiator = userService.getUserById(userId);
         Category category = CategoryMapper.toCategory(categoryService.getCategoryDtoById(newEventDto.getCategory()));
         newEventDto.setLocation(
@@ -72,6 +74,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
 
     @Override
     public EventFullDto updateEvent(Long userId, UpdateEventRequest updateEventRequest) {
+        checkStartOfEventAtLeast2Hours(updateEventRequest.getEventDate());
         User initiator = userService.getUserById(userId);
         Event event = findEventById(updateEventRequest.getEventId());
         if (!Objects.equals(initiator.getId(), event.getInitiator().getId())) {
@@ -128,5 +131,14 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     private Event findEventById(Long eventId) {
         return eventRepository.findById(eventId).orElseThrow(() -> new NotFoundException(
                 String.format("Event with id %d was not found in the database", eventId)));
+    }
+
+    private static void checkStartOfEventAtLeast2Hours(String newEventDate) {
+        LocalDateTime eventDate = UtilClass.toLocalDateTime(newEventDate);
+        LocalDateTime newTime = LocalDateTime.now().plusHours(2).withNano(0);
+        if (eventDate.isBefore(newTime)) {
+            throw new ForbiddenException("the date and time of the event cannot be earlier " +
+                    "than two hours from the current moment");
+        }
     }
 }
