@@ -115,7 +115,21 @@ public class PrivateEventServiceImpl implements PrivateEventService {
 
     @Override
     public EventFullDto cancelEvent(Long userId, Long eventId) {
-        return null;
+        User initiator = userService.getUserById(userId);
+        Event event = findEventById(eventId);
+        if (!Objects.equals(initiator.getId(), event.getInitiator().getId())) {
+            throw new ForbiddenException("Event data can be get and canceled only by the user who created it, " +
+                    "or by an administrator");
+        }
+        if (event.getState().equals(State.PENDING)) {
+            event.setState(State.CANCELED);
+            eventRepository.save(event);
+            return EventMapper.toEventFullDto(event);
+        } else {
+            throw new BadRequestException(
+                    "An Event can only be canceled with the PENDING status. Status of this event - " +
+                            event.getState());
+        }
     }
 
     @Override
