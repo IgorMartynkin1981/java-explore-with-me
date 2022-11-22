@@ -13,6 +13,7 @@ import explore.with.me.exeption.ForbiddenException;
 import explore.with.me.exeption.NotFoundException;
 import explore.with.me.locations.services.LocationService;
 import explore.with.me.requests.dto.ParticipationRequestDto;
+import explore.with.me.requests.services.PrivateRequestService;
 import explore.with.me.users.models.User;
 import explore.with.me.users.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     private final LocationService locationService;
     private final UserService userService;
     private final PublicCategoryService categoryService;
+    private final PrivateRequestService privateRequestService;
 
     @Override
     public Collection<EventShortDto> getEventListByUserId(Long userId, Integer from, Integer size) {
@@ -134,12 +136,46 @@ public class PrivateEventServiceImpl implements PrivateEventService {
 
     @Override
     public Collection<ParticipationRequestDto> getRequestsByEventId(Long userId, Long eventId) {
+        User initiator = userService.getUserById(userId);
+        Event event = findEventById(eventId);
+        if (!Objects.equals(initiator.getId(), event.getInitiator().getId())) {
+            throw new ForbiddenException("Event data can be get and canceled only by the user who created it, " +
+                    "or by an administrator");
+        }
+        /**
+         * ToDo
+         * return requestRepository.findAllByEventId(eventId).stream()
+         *                 .map(RequestMapper::toParticipationRequestDto).collect(Collectors.toList());
+         */
+
         return null;
     }
 
     @Override
     public ParticipationRequestDto confirmOrRejectRequest(Long userId, Long eventId, Long reqId, boolean confirm) {
+        Event event = findEventById(eventId);
+        if (!event.getRequestModeration()) {
+            throw new BadRequestException("Applications for participation in this event do not require " +
+                    "confirmation of the initiator of the event. RequestModeration=false");
+        }
+        if (!Objects.equals(userId, event.getInitiator().getId())) {
+            throw new ForbiddenException("Only the initiator of the event can confirm the application for " +
+                    "participation. The id of the user confirming the request does not match the id of the " +
+                    "event initiator");
+        }
+        /**
+         * ToDo
+         * Request request = requestRepository.findById(reqId).orElseThrow(() -> new DataNotFound(
+         *                 String.format("Заявка с id %d в событии: \"%s\" не обнаружено", reqId, event.getTitle())));
+         *         if (confirm) {
+         *             request.setStatus(RequestStatus.CONFIRMED);
+         *         } else {
+         *             request.setStatus(RequestStatus.REJECTED);
+         *         }
+         *         return RequestMapper.toParticipationRequestDto(requestRepository.save(request));
+         */
         return null;
+
     }
 
     private Event findEventById(Long eventId) {
