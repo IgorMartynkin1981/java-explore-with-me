@@ -3,6 +3,7 @@ package explore.with.me.events.services;
 import explore.with.me.events.dto.EventFullDto;
 import explore.with.me.events.dto.EventShortDto;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,8 +18,9 @@ public interface PublicEventService {
                                            Boolean onlyAvailable,
                                            String sort,
                                            Integer from,
-                                           Integer size);
+                                           Integer size,
+                                           HttpServletRequest httpServletRequest);
 
-    EventFullDto getEventById(Long eventId);
+    EventFullDto getEventById(Long eventId, HttpServletRequest request);
 
 }
