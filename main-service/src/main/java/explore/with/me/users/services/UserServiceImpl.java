@@ -1,6 +1,7 @@
 package explore.with.me.users.services;
 
 import explore.with.me.exeption.BadRequestException;
+import explore.with.me.exeption.NotFoundException;
 import explore.with.me.users.dto.NewUserRequest;
 import explore.with.me.users.dto.UserDto;
 import explore.with.me.users.dto.UserMapper;
@@ -52,5 +53,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new NotFoundException(
+                String.format("User with id %d was not found in the database", userId)));
     }
 }
