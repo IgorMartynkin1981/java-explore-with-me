@@ -5,6 +5,7 @@ import explore.with.me.categories.dto.CategoryMapper;
 import explore.with.me.categories.dto.NewCategoryDto;
 import explore.with.me.categories.models.Category;
 import explore.with.me.categories.repositories.CategoryRepository;
+import explore.with.me.events.services.AdminEventService;
 import explore.with.me.exeption.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class AdminCategoryServiceImpl implements AdminCategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final AdminEventService adminEventService;
 
     @Override
     public CategoryDto addNewCategory(NewCategoryDto newCategoryDto) {
@@ -33,11 +35,10 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
 
     @Override
     public void deleteCategory(Long categoryId) {
-        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new NotFoundException(
+        categoryRepository.findById(categoryId).orElseThrow(() -> new NotFoundException(
                 String.format("Category with id %d was not found in the database", categoryId)));
-        /**
-         * ToDo Добавить проверку "с категорией не должно быть связано ни одного события."
-         */
-        categoryRepository.deleteById(categoryId);
+        if (adminEventService.getEventsByCategoryId(categoryId).size() > 0) {
+            categoryRepository.deleteById(categoryId);
+        }
     }
 }

@@ -124,4 +124,9 @@ public class AdminEventServiceImpl implements AdminEventService {
         return eventRepository.findById(eventId).orElseThrow(() -> new NotFoundException(
                 String.format("Event with id %d was not found in the database", eventId)));
     }
+
+    @Override
+    public Collection<Event> getEventsByCategoryId(Long categoryId) {
+        return eventRepository.findAllByCategoryId(categoryId);
+    }
 }
