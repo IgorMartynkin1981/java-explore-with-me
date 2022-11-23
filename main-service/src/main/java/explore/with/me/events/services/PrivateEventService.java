@@ -23,4 +23,5 @@ public interface PrivateEventService {
     Collection<ParticipationRequestDto> getRequestsByEventId(Long userId, Long eventId);
 
     ParticipationRequestDto confirmOrRejectRequest(Long userId, Long eventId, Long reqId, boolean confirm);
+
 }

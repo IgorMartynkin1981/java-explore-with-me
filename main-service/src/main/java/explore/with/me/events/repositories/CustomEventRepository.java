@@ -19,4 +19,5 @@ public interface CustomEventRepository {
                                         Integer size,
                                         Pageable pageable);
 
+    List<Event> getEventsListById(List<Long> eventsId);
 }

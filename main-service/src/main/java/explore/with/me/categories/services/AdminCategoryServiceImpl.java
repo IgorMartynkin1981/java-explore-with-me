@@ -5,10 +5,14 @@ import explore.with.me.categories.dto.CategoryMapper;
 import explore.with.me.categories.dto.NewCategoryDto;
 import explore.with.me.categories.models.Category;
 import explore.with.me.categories.repositories.CategoryRepository;
+import explore.with.me.events.models.Event;
 import explore.with.me.events.services.AdminEventService;
+import explore.with.me.exeption.ForbiddenException;
 import explore.with.me.exeption.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor
@@ -37,8 +41,11 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
     public void deleteCategory(Long categoryId) {
         categoryRepository.findById(categoryId).orElseThrow(() -> new NotFoundException(
                 String.format("Category with id %d was not found in the database", categoryId)));
-        if (adminEventService.getEventsByCategoryId(categoryId).size() > 0) {
-            categoryRepository.deleteById(categoryId);
+        Collection<Event> events = adminEventService.getEventsByCategoryId(categoryId);
+        if (events.size() > 0) {
+            throw new ForbiddenException(String.format("A category that has events cannot be deleted. " +
+                    "There are events in the category with id = %d with the following id: %s", categoryId, events));
         }
+        categoryRepository.deleteById(categoryId);
     }
 }
