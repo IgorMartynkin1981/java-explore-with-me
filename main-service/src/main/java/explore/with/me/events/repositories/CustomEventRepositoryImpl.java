@@ -1,5 +1,6 @@
 package explore.with.me.events.repositories;
 
+import explore.with.me.UtilClass;
 import explore.with.me.events.models.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -50,7 +51,7 @@ public class CustomEventRepositoryImpl implements CustomEventRepository {
         }
         if (rangeStart != null && rangeEnd != null) {
             predicates.add(cb.between(eventRoot.get("eventDate"),
-                    rangeStart, rangeEnd));
+                    UtilClass.toLocalDateTime(rangeStart), UtilClass.toLocalDateTime(rangeEnd)));
         } else {
             predicates.add(cb.greaterThanOrEqualTo(eventRoot.get("eventDate"), LocalDateTime.now()));
         }
