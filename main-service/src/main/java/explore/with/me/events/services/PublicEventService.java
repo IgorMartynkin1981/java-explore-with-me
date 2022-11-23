@@ -2,6 +2,7 @@ package explore.with.me.events.services;
 
 import explore.with.me.events.dto.EventFullDto;
 import explore.with.me.events.dto.EventShortDto;
+import explore.with.me.events.models.Event;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -23,4 +24,5 @@ public interface PublicEventService {
 
     EventFullDto getEventById(Long eventId, HttpServletRequest request);
 
+    Event findEventById(Long eventId);
 }

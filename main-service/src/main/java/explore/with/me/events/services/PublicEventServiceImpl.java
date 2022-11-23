@@ -60,11 +60,12 @@ public class PublicEventServiceImpl implements PublicEventService {
     public EventFullDto getEventById(Long eventId, HttpServletRequest httpServletRequest) {
         addStat(httpServletRequest);
         Event event = findEventById(eventId);
-        addViews(event, List.of(httpServletRequest.getRequestURI()));
+        event = addViews(event, List.of(httpServletRequest.getRequestURI()));
         return EventMapper.toEventFullDto(event);
     }
 
-    private Event findEventById(Long eventId) {
+    @Override
+    public Event findEventById(Long eventId) {
         return eventRepository.findById(eventId).filter(event -> event.getState().equals(State.PUBLISHED))
                 .orElseThrow(() -> new NotFoundException(
                         String.format("Event with id %d was not found in the database or it has not yet been published",
@@ -80,18 +81,19 @@ public class PublicEventServiceImpl implements PublicEventService {
         eventsClient.saveStat(hit);
     }
 
-    private void addViews(Event event, List<String> uris) {
+    private Event addViews(Event event, List<String> uris) {
         ResponseEntity<Statistic[]> responseEntity = eventsClient.getStat(uris);
         Statistic[] stat = responseEntity.getBody();
         assert stat != null;
         if (stat.length < 1) {
             event.setViews(0);
-            return;
+            return event;
         }
         event.setViews(stat[0].getHits());
+        return event;
     }
 
-    private void addViews(Collection<Event> events) {
+    private Collection<Event> addViews(Collection<Event> events) {
         List<String> uris = new ArrayList<>();
         for (Event event : events) {
             uris.add("/events/" + event.getId());
@@ -111,5 +113,6 @@ public class PublicEventServiceImpl implements PublicEventService {
                 event.setViews(views.get(event.getId()));
             }
         }
+        return events;
     }
 }

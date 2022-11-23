@@ -1,8 +1,8 @@
 package explore.with.me.controllers;
 
-import explore.with.me.services.StatService;
 import explore.with.me.dto.EndpointHit;
 import explore.with.me.dto.ViewStats;
+import explore.with.me.services.StatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

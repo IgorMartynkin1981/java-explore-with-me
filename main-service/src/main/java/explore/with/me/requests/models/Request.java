@@ -49,4 +49,10 @@ public class Request {
         this.requester = requester;
         this.status = status;
     }
+
+    public Request(LocalDateTime created, Event event, User requester) {
+        this.created = created;
+        this.event = event;
+        this.requester = requester;
+    }
 }
