@@ -29,7 +29,7 @@ public class AdminEventServiceImpl implements AdminEventService {
     private final PublicCategoryService publicCategoryService;
 
     @Override
-    public Collection<EventFullDto> adminGetEvents(List<Long> users,
+    public Collection<EventFullDto> getAdminEvents(List<Long> users,
                                                    List<String> states,
                                                    List<Long> categories,
                                                    String rangeStart,
@@ -130,5 +130,10 @@ public class AdminEventServiceImpl implements AdminEventService {
     @Override
     public Collection<Event> getEventsByCategoryId(Long categoryId) {
         return eventRepository.findAllByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<Event> getEventsListById(List<Long> eventsId) {
+        return eventRepository.getEventsListById(eventsId);
     }
 }

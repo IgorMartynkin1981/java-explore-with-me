@@ -66,4 +66,17 @@ public class CustomEventRepositoryImpl implements CustomEventRepository {
         query.where(predicates.toArray(new Predicate[0]));
         return em.createQuery(query).getResultList();
     }
+
+    @Override
+    public List<Event> getEventsListById(List<Long> eventsId) {
+        var cb = em.getCriteriaBuilder();
+        var query = cb.createQuery(Event.class);
+        Root<Event> eventRoot = query.from(Event.class);
+        List<Predicate> predicates = new ArrayList<>();
+        if (eventsId != null && !eventsId.isEmpty()) {
+            predicates.add(eventRoot.get("id").in(eventsId));
+        }
+        query.where(predicates.toArray(new Predicate[0]));
+        return em.createQuery(query).getResultList();
+    }
 }

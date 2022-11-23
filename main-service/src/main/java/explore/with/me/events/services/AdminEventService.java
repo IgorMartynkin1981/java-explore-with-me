@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AdminEventService {
 
-    Collection<EventFullDto> adminGetEvents(List<Long> users,
+    Collection<EventFullDto> getAdminEvents(List<Long> users,
                                             List<String> states,
                                             List<Long> categories,
                                             String rangeStart,
@@ -24,4 +24,6 @@ public interface AdminEventService {
     EventFullDto rejectEvent(Long eventId);
 
     Collection<Event> getEventsByCategoryId(Long categoryId);
+
+    List<Event> getEventsListById(List<Long> eventsId);
 }

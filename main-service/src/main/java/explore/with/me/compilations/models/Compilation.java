@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @id* [...]
  * @title* String Заголовок подборки
- * @events    {@link Event} Список событий входящих в подборку
+ * @events {@link Event} Список событий входящих в подборку
  * @pinned* boolean Закреплена ли подборка на главной странице сайта
  */
 

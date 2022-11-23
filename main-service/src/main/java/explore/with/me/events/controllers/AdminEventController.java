@@ -30,7 +30,7 @@ public class AdminEventController {
                                                    @PositiveOrZero Integer from,
                                                    @RequestParam(name = "size", defaultValue = "10")
                                                    @Positive Integer size) {
-        return adminEventService.adminGetEvents(users, states, categories, rangeStart, rangeEnd, from, size);
+        return adminEventService.getAdminEvents(users, states, categories, rangeStart, rangeEnd, from, size);
     }
 
     @PutMapping("/{eventId}")
