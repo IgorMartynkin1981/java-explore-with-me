@@ -10,7 +10,8 @@ import javax.validation.constraints.Positive;
 
 /**
  * description:	 Категория
- * @id*	Long Идентификатор категории
+ *
+ * @id* Long Идентификатор категории
  * @name* String Название категории
  */
 

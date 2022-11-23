@@ -1,5 +1,6 @@
 package explore.with.me.events.services;
 
+
 import explore.with.me.categories.dto.CategoryMapper;
 import explore.with.me.categories.services.PublicCategoryService;
 import explore.with.me.events.dto.AdminUpdateEventRequest;
@@ -90,6 +91,7 @@ public class AdminEventServiceImpl implements AdminEventService {
         if (adminUpdateEventRequest.getTitle() != null) {
             event.setTitle(adminUpdateEventRequest.getTitle());
         }
+
         return EventMapper.toEventFullDto(eventRepository.save(event));
     }
 

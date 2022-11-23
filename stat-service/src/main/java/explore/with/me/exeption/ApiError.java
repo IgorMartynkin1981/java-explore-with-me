@@ -13,7 +13,7 @@ import java.util.List;
  * @errors List[String] Список стектрейсов или описания ошибок
  * @message String Сообщение об ошибке
  * @reason String Общее описание причины ошибки
- * @status    {@link StatusErrors} Код статуса HTTP-ответа
+ * @status {@link HttpStatus} Код статуса HTTP-ответа
  * @timestamp String Дата и время когда произошла ошибка (в формате "yyyy-MM-dd HH:mm:ss")
  */
 

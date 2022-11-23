@@ -21,11 +21,14 @@ import javax.validation.constraints.Positive;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    @Positive @NotNull
+    @Positive
+    @NotNull
     private Long id;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private String name;
-    @Email @NotNull
+    @Email
+    @NotNull
     private String email;
 
     public UserDto(String name, String email) {
