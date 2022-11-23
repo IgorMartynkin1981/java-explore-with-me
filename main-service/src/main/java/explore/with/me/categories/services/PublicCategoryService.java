@@ -1,7 +1,6 @@
 package explore.with.me.categories.services;
 
 import explore.with.me.categories.dto.CategoryDto;
-import explore.with.me.categories.models.Category;
 
 import java.util.Collection;
 

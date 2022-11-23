@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -29,11 +29,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public Collection<UserDto> getUsers(List<Long> usersIds, Integer from, Integer size) {
         if (usersIds == null) {
-            {
-                if (from < 0 || size < 1) {
-                    throw new BadRequestException("No positive values in the pagination");
-                }
+
+            if (from < 0 || size < 1) {
+                throw new BadRequestException("No positive values in the pagination");
             }
+
             int page = from / size;
             PageRequest pageRequest = PageRequest.of(page, size, Sort.by("name"));
             return userRepository.findAll(pageRequest)

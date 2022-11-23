@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor
-public class PrivateRequestServiceImpl implements PrivateRequestService{
+public class PrivateRequestServiceImpl implements PrivateRequestService {
 
     private final RequestRepository requestRepository;
 

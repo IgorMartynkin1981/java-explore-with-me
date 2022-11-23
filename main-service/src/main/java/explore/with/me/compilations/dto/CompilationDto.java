@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  *
  * @id* [...]
  * @title* String Заголовок подборки
- * @events    {@link Event} Список событий входящих в подборку
+ * @events {@link Event} Список событий входящих в подборку
  * @pinned* boolean Закреплена ли подборка на главной странице сайта
  */
 
@@ -25,11 +24,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompilationDto {
-    @Positive @NotNull @NotBlank
+    @Positive
+    @NotNull
+    @NotBlank
     private Long id;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private String title;
     private List<EventShortDto> events;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private Boolean pinned;
 }
