@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS events
     published_on       TIMESTAMP WITHOUT TIME ZONE,
     request_moderation BOOLEAN                                 NOT NULL,
     state              BIGINT                                  NOT NULL,
-    views              BIGINT,
     CONSTRAINT pk_event PRIMARY KEY (event_id),
     CONSTRAINT fk_events_on_categories FOREIGN KEY (category_id) REFERENCES categories (category_id),
     CONSTRAINT fk_events_on_users FOREIGN KEY (user_id) REFERENCES users (user_id),
