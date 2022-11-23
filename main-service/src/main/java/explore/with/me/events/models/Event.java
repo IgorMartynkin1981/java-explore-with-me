@@ -71,7 +71,6 @@ public class Event {
     private Boolean requestModeration;
     @Column(nullable = false)
     private State state;
-    @Column(nullable = false)
     private Integer views;
 
     public Event(String title, String annotation, Category category, Integer confirmedRequests,
