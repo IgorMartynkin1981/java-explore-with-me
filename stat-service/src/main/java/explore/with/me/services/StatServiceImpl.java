@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class StatServiceImpl implements StatService{
+public class StatServiceImpl implements StatService {
 
     private final StatRepository statRepository;
 
