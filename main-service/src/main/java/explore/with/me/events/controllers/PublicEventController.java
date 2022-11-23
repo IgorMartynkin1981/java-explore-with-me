@@ -6,6 +6,7 @@ import explore.with.me.events.services.PublicEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
@@ -29,7 +30,8 @@ public class PublicEventController {
                                                   @RequestParam(name = "from", defaultValue = "0")
                                                   @PositiveOrZero Integer from,
                                                   @RequestParam(name = "size", defaultValue = "10")
-                                                  @Positive Integer size) {
+                                                  @Positive Integer size,
+                                                  HttpServletRequest httpServletRequest) {
         return publicEventService.getAllEvents(
                 text,
                 categories,
@@ -39,11 +41,12 @@ public class PublicEventController {
                 onlyAvailable,
                 sort,
                 from,
-                size);
+                size,
+                httpServletRequest);
     }
 
     @GetMapping("/{id}")
-    public EventFullDto getEventById(@PathVariable Long eventId) {
-        return publicEventService.getEventById(eventId);
+    public EventFullDto getEventById(@PathVariable Long id, HttpServletRequest httpServletRequest) {
+        return publicEventService.getEventById(id, httpServletRequest);
     }
 }
