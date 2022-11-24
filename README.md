@@ -3,7 +3,7 @@ java-explore-with-me
 
 https://github.com/IgorMartynkin1981/java-explore-with-me
 
-Ссылка на PR https://github.com/IgorMartynkin1981/java-explore-with-me/pull/2
+Ссылка на PR --->>> https://github.com/IgorMartynkin1981/java-explore-with-me/pull/2  <<<---
 
 Пользователи данного приложения могут создавать категории, события, подавать заявкина на участие в событиях других пользователей. Реализован сбор статистики.
 Приложение состоит из двух сервисов:
