@@ -1,5 +1,6 @@
 package explore.with.me.events.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import explore.with.me.categories.dto.CategoryDto;
 import explore.with.me.categories.models.Category;
 import explore.with.me.events.models.State;
@@ -13,6 +14,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+import java.time.LocalDateTime;
 
 /**
  * @id Long Идентификатор
@@ -36,58 +39,32 @@ import javax.validation.constraints.Positive;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventFullDto {
-    @Positive
-    private Long id;
-    @NotNull
-    @NotBlank
-    private String title;
-    @NotNull
-    @NotBlank
-    private String annotation;
-    @NotNull
-    @NotBlank
-    private CategoryDto category;
-    private Integer confirmedRequests;
-    private String createdOn;
+public class EventFullDto extends EventShortDto{
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdOn;
     private String description;
     @NotNull
     @NotBlank
-    private String eventDate;
-    @NotNull
-    @NotBlank
-    private UserShortDto initiator;
-    @NotNull
-    @NotBlank
     private Location location;
-    @NotNull
-    @NotBlank
-    private Boolean paid;
     private Integer participantLimit;
-    private String publishedOn;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime publishedOn;
     private Boolean requestModeration;
     private State state;
-    private Integer views;
 
-    public EventFullDto(Long id, String title, String annotation, CategoryDto category,
-                        Integer confirmedRequests, String createdOn, String description,
-                        String eventDate, UserShortDto initiator, Location location,
-                        Boolean paid, Integer participantLimit, Boolean requestModeration,
-                        State state, Integer views) {
-        this.id = id;
-        this.title = title;
-        this.annotation = annotation;
-        this.category = category;
-        this.confirmedRequests = confirmedRequests;
+    public EventFullDto(@Positive Long id, @NotBlank String title,
+                        @NotBlank String annotation, @NotNull @NotBlank CategoryDto category,
+                        @PositiveOrZero Integer confirmedRequests, LocalDateTime eventDate,
+                        @NotNull @NotBlank UserShortDto initiator, @NotNull @NotBlank Boolean paid,
+                        Integer views, LocalDateTime createdOn, String description, Location location,
+                        Integer participantLimit, Boolean requestModeration,
+                        State state) {
+        super(id, title, annotation, category, confirmedRequests, eventDate, initiator, paid, views);
         this.createdOn = createdOn;
         this.description = description;
-        this.eventDate = eventDate;
-        this.initiator = initiator;
         this.location = location;
-        this.paid = paid;
         this.participantLimit = participantLimit;
         this.requestModeration = requestModeration;
         this.state = state;
-        this.views = views;
     }
 }

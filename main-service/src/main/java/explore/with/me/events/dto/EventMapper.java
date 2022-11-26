@@ -14,14 +14,13 @@ import java.time.LocalDateTime;
 public class EventMapper {
 
     public static Event toEvent(NewEventDto newEventDto, Category category, User initiator) {
-        LocalDateTime eventDate = LocalDateTime.parse(newEventDto.getEventDate(), UtilClass.getFormat());
         return new Event(newEventDto.getTitle(),
                 newEventDto.getAnnotation(),
                 category,
                 0,
                 LocalDateTime.now(),
                 newEventDto.getDescription(),
-                eventDate,
+                newEventDto.getEventDate(),
                 initiator,
                 newEventDto.getLocation(),
                 newEventDto.getPaid(),
@@ -39,18 +38,18 @@ public class EventMapper {
                 event.getAnnotation(),
                 CategoryMapper.toCategoryDto(event.getCategory()),
                 event.getConfirmedRequests(),
-                event.getCreatedOn().format(UtilClass.getFormat()),
-                event.getDescription(),
-                event.getEventDate().format(UtilClass.getFormat()),
+                event.getEventDate(),
                 UserMapper.toUserShortDto(event.getInitiator()),
-                event.getLocation(),
                 event.getPaid(),
+                event.getViews(),
+                event.getCreatedOn(),
+                event.getDescription(),
+                event.getLocation(),
                 event.getParticipantLimit(),
                 event.getRequestModeration(),
-                event.getState(),
-                event.getViews());
+                event.getState());
         if (event.getPublishedOn() != null) {
-            eventFullDto.setPublishedOn(event.getPublishedOn().format(UtilClass.getFormat()));
+            eventFullDto.setPublishedOn(event.getPublishedOn());
         }
         return eventFullDto;
     }
@@ -62,7 +61,7 @@ public class EventMapper {
                 event.getAnnotation(),
                 CategoryMapper.toCategoryDto(event.getCategory()),
                 event.getConfirmedRequests(),
-                event.getEventDate().format(UtilClass.getFormat()),
+                event.getEventDate(),
                 UserMapper.toUserShortDto(event.getInitiator()),
                 event.getPaid(),
                 event.getViews());

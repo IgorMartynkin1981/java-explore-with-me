@@ -69,6 +69,7 @@ public class Event {
     private LocalDateTime publishedOn;
     @Column(name = "request_moderation", nullable = false)
     private Boolean requestModeration;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private State state;
     @Transient
