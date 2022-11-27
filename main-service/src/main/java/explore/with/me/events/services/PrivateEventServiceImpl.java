@@ -43,7 +43,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     public Collection<EventShortDto> getEventListByUserId(Long userId, Integer from, Integer size) {
         userService.getUserById(userId);
         int page = from / size;
-        Collection<Event> eventCollection = eventRepository.findAll(PageRequest.of(page, size))
+        Collection<Event> eventCollection = eventRepository.findAll()
                 .stream()
                 .filter(event -> Objects.equals(event.getInitiator().getId(), userId))
                 .collect(Collectors.toList());
@@ -105,8 +105,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
             event.setDescription(updateEventRequest.getDescription());
         }
         if (updateEventRequest.getEventDate() != null) {
-            event.setEventDate(LocalDateTime.parse(updateEventRequest.getEventDate(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            event.setEventDate(updateEventRequest.getEventDate());
         }
         if (updateEventRequest.getPaid() != null) {
             event.setPaid(updateEventRequest.getPaid());
@@ -178,8 +177,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
                 String.format("Event with id %d was not found in the database", eventId)));
     }
 
-    private static void checkStartOfEventAtLeast2Hours(String newEventDate) {
-        LocalDateTime eventDate = UtilClass.toLocalDateTime(newEventDate);
+    private static void checkStartOfEventAtLeast2Hours(LocalDateTime eventDate) {
         LocalDateTime newTime = LocalDateTime.now().plusHours(2).withNano(0);
         if (eventDate.isBefore(newTime)) {
             throw new ForbiddenException("the date and time of the event cannot be earlier " +

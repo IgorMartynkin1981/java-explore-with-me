@@ -1,6 +1,5 @@
 package explore.with.me.compilations.controllers;
 
-
 import explore.with.me.compilations.dto.CompilationDto;
 import explore.with.me.compilations.services.PublicCompilationService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +10,9 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
 
+/**
+ * Публичный API для работы с подборками событий
+ */
 
 @RestController
 @RequestMapping(path = "/compilations")

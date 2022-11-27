@@ -1,9 +1,12 @@
 package explore.with.me.events.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import explore.with.me.locations.models.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 /**
  * description:	Информация для редактирования события администратором. Все поля необязательные. Значение полей не валидируется.
@@ -27,7 +30,8 @@ public class AdminUpdateEventRequest {
     private String annotation;
     private Long category;
     private String description;
-    private String eventDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime eventDate;
     private Location location;
     private Boolean paid;
     private Integer participantLimit;

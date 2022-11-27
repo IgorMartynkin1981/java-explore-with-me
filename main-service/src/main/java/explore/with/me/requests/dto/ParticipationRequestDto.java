@@ -1,12 +1,15 @@
 package explore.with.me.requests.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
 
 /**
  * description:	 Заявка на участие в событии
@@ -25,9 +28,8 @@ public class ParticipationRequestDto {
     @NotNull
     @Positive
     private Long id;
-    @NotNull
-    @NotBlank
-    private String created;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private @NotNull LocalDateTime created;
     @NotNull
     @Positive
     private Long event;

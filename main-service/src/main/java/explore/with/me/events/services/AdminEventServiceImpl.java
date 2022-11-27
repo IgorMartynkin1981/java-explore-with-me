@@ -16,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,8 +72,7 @@ public class AdminEventServiceImpl implements AdminEventService {
             event.setDescription(adminUpdateEventRequest.getDescription());
         }
         if (adminUpdateEventRequest.getEventDate() != null) {
-            event.setEventDate(LocalDateTime.parse(adminUpdateEventRequest.getEventDate(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            event.setEventDate(adminUpdateEventRequest.getEventDate());
         }
         if (adminUpdateEventRequest.getLocation() != null) {
             event.setLocation(adminUpdateEventRequest.getLocation());

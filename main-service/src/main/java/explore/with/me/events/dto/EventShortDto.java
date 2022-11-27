@@ -1,5 +1,6 @@
 package explore.with.me.events.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import explore.with.me.categories.dto.CategoryDto;
 import explore.with.me.categories.models.Category;
 import explore.with.me.users.dto.UserShortDto;
@@ -11,6 +12,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+import java.time.LocalDateTime;
 
 /**
  * description: Краткая информация о событии
@@ -41,10 +44,10 @@ public class EventShortDto {
     @NotNull
     @NotBlank
     private CategoryDto category;
+    @PositiveOrZero
     private Integer confirmedRequests;
-    @NotNull
-    @NotBlank
-    private String eventDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private @NotNull LocalDateTime eventDate;
     @NotNull
     @NotBlank
     private UserShortDto initiator;

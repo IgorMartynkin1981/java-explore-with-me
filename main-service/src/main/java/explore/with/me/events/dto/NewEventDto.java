@@ -1,14 +1,15 @@
 package explore.with.me.events.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import explore.with.me.events.models.State;
 import explore.with.me.locations.models.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 
 /**
  * description:	 Новое событие
@@ -39,23 +40,26 @@ import javax.validation.constraints.Positive;
 public class NewEventDto {
 
     @NotNull
+    @NotBlank
     @Length(min = 3, max = 120)
     private String title;
+    @NotBlank
     @NotNull
     @Length(min = 20, max = 2000)
     private String annotation;
     @NotNull
     @Positive
     private Long category;
+    @NotBlank
     @NotNull
     @Length(min = 20, max = 7000)
     private String description;
-    @NotNull
-    @NotBlank
-    private String eventDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private @NotNull @Future LocalDateTime eventDate;
     @NotNull
     private Location location;
     private Boolean paid;
+    @PositiveOrZero
     private Integer participantLimit;
     private Boolean requestModeration;
 }
