@@ -11,9 +11,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 /**
- * Контроллер для пользователей с ролью админа
+ * API для работы с категориями для пользователей с ролью админа
+ *
  * <p>
  * Создание, изменение и удаление Категорий
+ * Обратите внимание: имя категории должно быть уникальным
  * </p>
  */
 @RestController
@@ -27,8 +29,8 @@ public class AdminCategoryController {
     /**
      * Создать новую категорию
      *
-     * @param newCategoryDto принимает данные (name - имя категории) в формате JSON
-     * @return возвращает данные созданной категории (id & name) в формате JSON
+     * @param #newCategoryDto принимает данные (name - имя категории, должно быть Уникальным) в формате JSON
+     * @return #CategoryDto возвращает данные созданной категории (id & name) в формате JSON
      */
     @PostMapping
     public CategoryDto addNewCategory(@RequestBody @Valid NewCategoryDto newCategoryDto) {
@@ -38,8 +40,8 @@ public class AdminCategoryController {
     /**
      * Вносит изменения в категорию
      *
-     * @param categoryDto принимает данные (id & name) в формате JSON
-     * @return данные обновлённые данные категории (id & name) в формате JSON
+     * @param #categoryDto принимает данные (id & name - имя категории, должно быть Уникальным) в формате JSON
+     * @return #CategoryDto данные обновлённые данные категории (id & name) в формате JSON
      */
     @PatchMapping
     public CategoryDto updateCategory(@RequestBody @Valid CategoryDto categoryDto) {
@@ -49,7 +51,11 @@ public class AdminCategoryController {
     /**
      * Удаляет категорию по id
      *
-     * @param categoryId id категории которую требуется удалить
+     * <p>
+     * Обратите внимание: с категорией не должно быть связано ни одного события
+     * </p>
+     *
+     * @param #categoryId id категории которую требуется удалить
      */
     @DeleteMapping("/{categoryId}")
     public void deleteCategory(@PathVariable @Positive Long categoryId) {

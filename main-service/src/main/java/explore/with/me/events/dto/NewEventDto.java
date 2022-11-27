@@ -8,9 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 /**
@@ -42,24 +40,26 @@ import java.time.LocalDateTime;
 public class NewEventDto {
 
     @NotNull
+    @NotBlank
     @Length(min = 3, max = 120)
     private String title;
+    @NotBlank
     @NotNull
     @Length(min = 20, max = 2000)
     private String annotation;
     @NotNull
     @Positive
     private Long category;
+    @NotBlank
     @NotNull
     @Length(min = 20, max = 7000)
     private String description;
-    @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime eventDate;
+    private @NotNull @Future LocalDateTime eventDate;
     @NotNull
     private Location location;
     private Boolean paid;
+    @PositiveOrZero
     private Integer participantLimit;
     private Boolean requestModeration;
-    private State state = State.PENDING;
 }

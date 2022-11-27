@@ -11,7 +11,10 @@ import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
 
 /**
- * Контроллер для запросов от не авторизованных пользователей
+ * Публичный API для работы с категориями
+ *
+ * <p> Контроллер для запросов от не авторизованных пользователей
+ * <p> Может выводить все категории или определённую категорию
  */
 @RestController
 @RequestMapping(path = "/categories")
@@ -29,8 +32,8 @@ public class PublicCategoryController {
      * параметры устанавливаются в строке запроса
      * </p>
      *
-     * @param from
-     * @param size
+     * @param #from количество категорий, которые нужно пропустить для формирования текущего набора
+     * @param #size количество категорий в наборе
      * @return данные данные категории (id & name) в формате JSON
      */
     @GetMapping

@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
+/**
+ * API для работы с подборками событий для пользователей с ролью админа
+ */
+
 @RestController
 @RequestMapping(path = "/admin/compilations")
 @Validated

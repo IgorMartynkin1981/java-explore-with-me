@@ -35,8 +35,10 @@ import java.time.LocalDateTime;
 public class EventShortDto {
     @Positive
     private Long id;
+    @NotNull
     @NotBlank
     private String title;
+    @NotNull
     @NotBlank
     private String annotation;
     @NotNull
@@ -45,7 +47,7 @@ public class EventShortDto {
     @PositiveOrZero
     private Integer confirmedRequests;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime eventDate;
+    private @NotNull LocalDateTime eventDate;
     @NotNull
     @NotBlank
     private UserShortDto initiator;
