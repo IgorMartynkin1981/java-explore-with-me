@@ -1,6 +1,5 @@
 package explore.with.me.events.services;
 
-
 import explore.with.me.categories.dto.CategoryMapper;
 import explore.with.me.categories.services.PublicCategoryService;
 import explore.with.me.events.dto.AdminUpdateEventRequest;
@@ -66,7 +65,8 @@ public class AdminEventServiceImpl implements AdminEventService {
             event.setAnnotation(adminUpdateEventRequest.getAnnotation());
         }
         if (adminUpdateEventRequest.getCategory() != null) {
-            event.setCategory(CategoryMapper.toCategory(publicCategoryService.getCategoryDtoById(adminUpdateEventRequest.getCategory())));
+            event.setCategory(CategoryMapper.toCategory(
+                    publicCategoryService.getCategoryDtoById(adminUpdateEventRequest.getCategory())));
         }
         if (adminUpdateEventRequest.getDescription() != null) {
             event.setDescription(adminUpdateEventRequest.getDescription());

@@ -13,6 +13,7 @@ public class UtilClass {
 
     /**
      * Преобразует строковое значение в LocalDateTime
+     *
      * @param value строковое значение даты в формате "yyyy-MM-dd HH:mm:ss"
      * @return значение даты в формате LocalDateTime
      */
@@ -26,6 +27,7 @@ public class UtilClass {
 
     /**
      * Применять для форматирования даты в формате "yyyy-MM-dd HH:mm:ss"
+     *
      * @return DateTimeFormatter
      */
     public static DateTimeFormatter getFormat() {

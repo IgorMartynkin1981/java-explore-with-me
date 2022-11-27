@@ -1,7 +1,5 @@
 package explore.with.me.events.dto;
 
-
-import explore.with.me.UtilClass;
 import explore.with.me.categories.dto.CategoryMapper;
 import explore.with.me.categories.models.Category;
 import explore.with.me.events.models.Event;

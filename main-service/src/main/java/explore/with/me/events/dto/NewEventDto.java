@@ -1,7 +1,6 @@
 package explore.with.me.events.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import explore.with.me.events.models.State;
 import explore.with.me.locations.models.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;

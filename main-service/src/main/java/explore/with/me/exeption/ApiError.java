@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 /**
- * description:	 Сведения об ошибке
+ * Description:	Сведения об ошибке
  *
  * @errors List[String] Список стектрейсов или описания ошибок
  * @message String Сообщение об ошибке

@@ -1,6 +1,5 @@
 package explore.with.me.events.services;
 
-import explore.with.me.UtilClass;
 import explore.with.me.categories.dto.CategoryMapper;
 import explore.with.me.categories.models.Category;
 import explore.with.me.categories.services.PublicCategoryService;
@@ -20,11 +19,9 @@ import explore.with.me.requests.services.PrivateRequestService;
 import explore.with.me.users.models.User;
 import explore.with.me.users.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
