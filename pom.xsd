@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://maven.apache.org/POM/4.0.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="project" type="ns:projectType" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+  <xs:complexType name="modulesType">
+    <xs:sequence>
+      <xs:element name="module" maxOccurs="unbounded" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="main-service"/>
+            <xs:enumeration value="stat-service"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parentType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="groupId"/>
+      <xs:element type="xs:string" name="artifactId"/>
+      <xs:element type="xs:string" name="version"/>
+      <xs:element type="xs:string" name="relativePath"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="propertiesType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="java.version"/>
+      <xs:element type="xs:string" name="project.build.sourceEncoding"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="systemPropertyVariablesType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="spring.profiles.active"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configurationType">
+    <xs:sequence>
+      <xs:element type="ns:systemPropertyVariablesType" name="systemPropertyVariables" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="xs:string" name="configLocation" minOccurs="0"/>
+      <xs:element type="xs:string" name="failOnViolation" minOccurs="0"/>
+      <xs:element type="xs:string" name="logViolationsToConsole" minOccurs="0"/>
+      <xs:element type="xs:string" name="includeTestSourceDirectory" minOccurs="0"/>
+      <xs:element type="xs:string" name="effort" minOccurs="0"/>
+      <xs:element type="xs:string" name="threshold" minOccurs="0"/>
+      <xs:element type="xs:string" name="output" minOccurs="0"/>
+      <xs:element type="ns:rulesType" name="rules" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pluginType">
+    <xs:sequence>
+      <xs:element name="groupId">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="org.apache.maven.plugins"/>
+            <xs:enumeration value="com.github.spotbugs"/>
+            <xs:enumeration value="org.jacoco"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="artifactId">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="maven-surefire-plugin"/>
+            <xs:enumeration value="maven-checkstyle-plugin"/>
+            <xs:enumeration value="spotbugs-maven-plugin"/>
+            <xs:enumeration value="jacoco-maven-plugin"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="version" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="3.1.2"/>
+            <xs:enumeration value="4.7.0.0"/>
+            <xs:enumeration value="0.8.8"/>
+            <xs:enumeration value="4.7.2.1"/>
+            <xs:enumeration value="0.8.1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="ns:configurationType" name="configuration" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="ns:executionsType" name="executions" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="ns:dependenciesType" name="dependencies" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="goalsType">
+    <xs:sequence>
+      <xs:element name="goal">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="check"/>
+            <xs:enumeration value="prepare-agent"/>
+            <xs:enumeration value="report"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="executionType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="id">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="jacoco-initialize"/>
+            <xs:enumeration value="jacoco-check"/>
+            <xs:enumeration value="jacoco-site"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="ns:goalsType" name="goals" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element name="phase">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="compile"/>
+            <xs:enumeration value="install"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="ns:configurationType" name="configuration" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="executionsType">
+    <xs:sequence>
+      <xs:element type="ns:executionType" name="execution" maxOccurs="unbounded" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dependencyType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="groupId"/>
+      <xs:element type="xs:string" name="artifactId"/>
+      <xs:element type="xs:string" name="version"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dependenciesType">
+    <xs:sequence>
+      <xs:element type="ns:dependencyType" name="dependency" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="limitType">
+    <xs:sequence>
+      <xs:element name="counter">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="INSTRUCTION"/>
+            <xs:enumeration value="LINE"/>
+            <xs:enumeration value="BRANCH"/>
+            <xs:enumeration value="COMPLEXITY"/>
+            <xs:enumeration value="METHOD"/>
+            <xs:enumeration value="CLASS"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="COVEREDRATIO"/>
+            <xs:enumeration value="MISSEDCOUNT"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="minimum" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0.01"/>
+            <xs:enumeration value="0.2"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="maximum" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="limitsType">
+    <xs:sequence>
+      <xs:element type="ns:limitType" name="limit" maxOccurs="unbounded" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ruleType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="element"/>
+      <xs:element type="ns:limitsType" name="limits" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="rulesType">
+    <xs:sequence>
+      <xs:element type="ns:ruleType" name="rule" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pluginsType">
+    <xs:sequence>
+      <xs:element type="ns:pluginType" name="plugin" maxOccurs="unbounded" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pluginManagementType">
+    <xs:sequence>
+      <xs:element type="ns:pluginsType" name="plugins" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buildType">
+    <xs:sequence>
+      <xs:element type="ns:pluginManagementType" name="pluginManagement" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="ns:pluginsType" name="plugins" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reportingType">
+    <xs:sequence>
+      <xs:element type="ns:pluginsType" name="plugins" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="profileType">
+    <xs:sequence>
+      <xs:element name="id">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="check"/>
+            <xs:enumeration value="coverage"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="ns:buildType" name="build" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="ns:reportingType" name="reporting" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="profilesType">
+    <xs:sequence>
+      <xs:element type="ns:profileType" name="profile" maxOccurs="unbounded" minOccurs="0" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="projectType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="modelVersion"/>
+      <xs:element type="ns:modulesType" name="modules" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="ns:parentType" name="parent" xmlns:ns="http://maven.apache.org/POM/4.0.0">
+        <xs:annotation>
+          <xs:documentation> lookup parent from repository </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="groupId"/>
+      <xs:element type="xs:string" name="artifactId"/>
+      <xs:element type="xs:string" name="version"/>
+      <xs:element type="xs:string" name="packaging"/>
+      <xs:element type="ns:propertiesType" name="properties" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="ns:buildType" name="build" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+      <xs:element type="ns:profilesType" name="profiles" xmlns:ns="http://maven.apache.org/POM/4.0.0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
