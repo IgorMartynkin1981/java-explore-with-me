@@ -31,7 +31,7 @@ public class Comment {
     private Long id;
     @Column(name = "created", nullable = false)
     private LocalDateTime created;
-    @Column(nullable = false)
+    @Column(name = "comment", nullable = false)
     private String comment;
     @Column(name = "is_positive")
     private boolean isPositive;
