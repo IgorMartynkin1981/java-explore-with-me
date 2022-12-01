@@ -18,16 +18,6 @@ public class CommentMapper {
         );
     }
 
-    public static Comment toComment(CommentDto CommentDto, Event event, User owner) {
-        return new Comment(
-                CommentDto.getCreated(),
-                CommentDto.getComment(),
-                CommentDto.isPositive(),
-                event,
-                owner
-        );
-    }
-
     public static CommentDto toCommentDto(Comment comment) {
         return new CommentDto(
                 comment.getId(),
